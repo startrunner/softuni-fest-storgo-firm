@@ -45,8 +45,12 @@ namespace StorgoFirm.Web
         public string Name { get; set; }
         public DateTime DateUtc { get; set; }
 
+        [ForeignKey(nameof(SportId))]
+        public Sport Sport { get; set; }
         public long SportId { get; set; }
 
+        [ForeignKey(nameof(LeagueId))]
+        public League League { get; set; }
         public long LeagueId { get; set; }
 
         public decimal HomeTeamScore { get; set; }

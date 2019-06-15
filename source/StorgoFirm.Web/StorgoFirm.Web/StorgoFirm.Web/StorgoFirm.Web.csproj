@@ -23,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\StorgoFirm.Extensions\StorgoFirm.Extensions.csproj" />
     <ProjectReference Include="..\StorgoFirm.Web.ViewModels\StorgoFirm.Web.ViewModels.csproj" />
   </ItemGroup>
 
