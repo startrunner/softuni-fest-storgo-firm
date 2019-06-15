@@ -49,11 +49,14 @@ namespace StorgoFirm.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseMvc(routes => {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
-            });
+            app.UseMvc(
+                routes => {
+                    routes.MapRoute(
+                        name: "default",
+                        template: "{controller}/{action=Index}/{id?}"
+                    );
+                }
+            );
 
             app.UseSpa(spa => {
                 spa.Options.SourcePath = "ClientApp";

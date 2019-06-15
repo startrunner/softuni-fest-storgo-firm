@@ -8,6 +8,9 @@ namespace StorgoFirm.Web.ViewModels
     {
         const string DateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fff'Z'";
 
+        [JsonProperty("id")]
+        public ulong Id { get; set; }
+
         [JsonProperty("eventName")]
         public string Name { get; set; }
 
@@ -42,6 +45,5 @@ namespace StorgoFirm.Web.ViewModels
 
         [JsonProperty("drawOdds")]
         public double DrawOdds { get; set; }
-
     }
 }

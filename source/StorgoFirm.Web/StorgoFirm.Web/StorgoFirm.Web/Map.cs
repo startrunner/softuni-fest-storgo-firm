@@ -7,7 +7,6 @@ namespace StorgoFirm.Web
         public static Sport ToModel(EventSportViewModel viewModel)
         {
             return new Sport {
-                Id = (long)viewModel.Id,
                 Name = viewModel.Name
             };
         }
@@ -15,7 +14,6 @@ namespace StorgoFirm.Web
         public static League ToModel(EventLeagueViewModel viewModel)
         {
             return new League {
-                Id = (long)viewModel.Id,
                 Name = viewModel.Name,
                 SportId = (long)viewModel.SportId
             };
@@ -25,7 +23,7 @@ namespace StorgoFirm.Web
         {
             return new SportEvent {
                 Name = viewModel.Name,
-                DateUtc = viewModel.DateUtc
+                DateUtc = viewModel.DateUtc,
                 HomeTeamScore = viewModel.HomeTeamScore,
                 AwayTeamScore = viewModel.AwayTeamScore,
                 HomeTeamOdds = viewModel.HomeTeamOdds,
@@ -56,6 +54,7 @@ namespace StorgoFirm.Web
         public static SportEventViewModel ToViewModel(SportEvent model)
         {
             return new SportEventViewModel {
+                Id = (ulong)model.Id,
                 AwayTeamScore = model.AwayTeamScore,
                 HomeTeamScore = model.HomeTeamScore,
                 AwayTeamOdds = model.AwayTeamOdds,
