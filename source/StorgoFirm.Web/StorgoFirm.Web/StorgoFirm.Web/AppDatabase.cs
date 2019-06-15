@@ -12,6 +12,16 @@ namespace StorgoFirm.Web
         {
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder
+                .Entity<Sport>()
+                .HasMany<League>(navigationName: nameof(Sport.Leagues))
+                .WithOne(navigationName: nameof(League.Sport));
+
+            base.OnModelCreating(modelBuilder);
+        }
+
         public DbSet<Sport> Sports { get; set; }
         public DbSet<League> Leagues { get; set; }
         public DbSet<SportEvent> Events { get; set; }
