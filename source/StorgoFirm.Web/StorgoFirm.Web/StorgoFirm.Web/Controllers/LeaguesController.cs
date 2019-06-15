@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace StorgoFirm.Web.Controllers
 {
+    [Route("api/[controller]")]
     public class LeaguesController : Controller
     {
         [HttpGet]
