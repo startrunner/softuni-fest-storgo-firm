@@ -71,6 +71,23 @@ namespace StorgoFirm.Web.Controllers
         }
 
         [ApiGet]
+        public SportEventViewModel[] ListEarliest([FromServices]AppDatabase db, [FromQuery, FromForm] int count = 10)
+        {
+            SportEvent[] models =
+                db
+                .Events
+                .OrderBy(x => x.DateUtc)
+                .Include(x => x.Sport)
+                .Include(x => x.League)
+                .Take(count)
+                .ToArray();
+
+            SportEventViewModel[] viewModels = models.Select(Map.ToViewModel).ToArray();
+
+            return viewModels;
+        }
+
+        [ApiGet]
         public SportEventViewModel[] List(
             [FromServices]AppDatabase db,
             [FromQuery, FromForm]string earliestDateUtc = null,
