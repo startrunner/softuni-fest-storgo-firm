@@ -15,7 +15,7 @@ export default class App extends Component {
         super(props);
         this.state = {
             events: [],
-            isLoading:true
+            isLoading: true
         }
     }
 
@@ -25,7 +25,8 @@ export default class App extends Component {
         this.setState({ isLoading: true });
         const events = await (await get("/api/events/List")).json();
         const sports = await (await get("/api/Sports/List")).json();
-        this.setState({ events, sports });
+        const leagues = await (await get("api/Leagues/List")).json();
+        this.setState({ events, sports, leagues });
         this.setState({ isLoading: false });
     }
 
@@ -36,6 +37,7 @@ export default class App extends Component {
     render() {
         const events = this.state.events;
         const sports = this.state.sports;
+        const leagues = this.state.leagues;
         return (
             <div className="app-window">
                 <link
@@ -44,12 +46,12 @@ export default class App extends Component {
                 />
                 <Route exact path="/" render={(props) =>
                     <Layout events={events} >
-                        <Home {...props} isAuthed={true} events={events} sports={sports} isLoading={this.state.isLoading} />
+                        <Home {...props} isAuthed={true} events={events} sports={sports} leagues={leagues} isLoading={this.state.isLoading} />
                     </Layout>
                 } />
                 <Route exact path="/admin" render={(props) =>
                     <Layout events={events} isAdmin={true} >
-                        <Home {...props} isAuthed={true} events={events} sports={sports} isAdmin={true} isLoading={this.state.isLoading} />
+                        <Home {...props} isAuthed={true} events={events} sports={sports} leagues={leagues} isAdmin={true} isLoading={this.state.isLoading} />
                     </Layout>
                 } />
             </div>

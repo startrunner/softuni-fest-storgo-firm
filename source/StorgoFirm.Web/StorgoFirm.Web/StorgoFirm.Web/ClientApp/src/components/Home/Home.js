@@ -33,6 +33,7 @@ export class Home extends Component {
         super(props);
         this.state = {
             curSport: null,
+            curLeague: null,
             curFormat: FORMAT_DECIMAL
         };
     }
@@ -40,7 +41,10 @@ export class Home extends Component {
     componentDidMount() {
         const events = this.props.events;
         const sports = this.props.sports;
+        const leagues = this.props.leagues;
+    }
 
+    handleLeagueChange(leagueId) {
 
     }
 
