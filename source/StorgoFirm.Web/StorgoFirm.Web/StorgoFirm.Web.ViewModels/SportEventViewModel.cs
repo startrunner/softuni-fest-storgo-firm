@@ -19,7 +19,7 @@ namespace StorgoFirm.Web.ViewModels
         public string DateUtcString
         {
             get => DateUtc.ToString(DateFormat, CultureInfo.InvariantCulture);
-            set => DateUtc = DateTime.Parse(value, CultureInfo.InvariantCulture);
+            set => DateUtc = DateTime.ParseExact(value, DateFormat, CultureInfo.InvariantCulture);
         }
 
         [JsonIgnore]
