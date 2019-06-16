@@ -1,0 +1,42 @@
+﻿.dekstopheader {
+  background-color:white!important;
+  border:none!important;
+  width:100%!important;
+  padding-left:0px!important;
+  padding-right:0px!important;
+}
+
+.dekstopheader-button{
+  text-emphasis-color: black!important;
+}
+
+.dekstopheader-home{
+  color:blue!important;
+}
+
+.dekstop-header-menu-grid{
+  width:1200px!important;
+}
+
+.dekstopheader-menu{
+  border:none!important;
+}
+
+.logo-image{
+  height:50px!important;
+}
+
+.dekstop-header{
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.all-products-popup{
+  height:300px;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+
+.dekstopheader-menu-button{
+  background-color:transparent!important;
+}
