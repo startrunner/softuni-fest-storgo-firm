@@ -14,16 +14,19 @@ export default class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            events: []
+            events: [],
+            isLoading:true
         }
     }
 
     static displayName = App.name;
 
     getData = async () => {
+        this.setState({ isLoading: true });
         const events = await (await get("/api/events/List")).json();
         const sports = await (await get("/api/Sports/List")).json();
         this.setState({ events, sports });
+        this.setState({ isLoading: false });
     }
 
     componentDidMount() {
@@ -39,11 +42,16 @@ export default class App extends Component {
                     rel="stylesheet"
                     href="//cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"
                 />
-                <Layout events={events} >
-                    <Route exact path="/" render={(props) => <Home {...props} isAuthed={true} events={events} sports={sports} />} />
-                    <Route path="/counter" render={(props) => <Counter {...props} isAuthed={true} />} />
-                    <Route path="/fetch-data" render={(props) => <FetchData {...props} isAuthed={true} />} />
-                </Layout>
+                <Route exact path="/" render={(props) =>
+                    <Layout events={events} >
+                        <Home {...props} isAuthed={true} events={events} sports={sports} isLoading={this.state.isLoading} />
+                    </Layout>
+                } />
+                <Route exact path="/admin" render={(props) =>
+                    <Layout events={events} isAdmin={true} >
+                        <Home {...props} isAuthed={true} events={events} sports={sports} isAdmin={true} isLoading={this.state.isLoading} />
+                    </Layout>
+                } />
             </div>
         );
     }
