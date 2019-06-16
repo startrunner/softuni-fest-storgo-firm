@@ -11,7 +11,8 @@ export class Home extends Component {
   static displayName = Home.name;
 
   render() {
-    const events = this.props.events;
+      const events = this.props.events;
+      const sports = this.props.sports;
     return (
       <Grid columns={3} className="home-grid">
         {events.length>0 ? 
