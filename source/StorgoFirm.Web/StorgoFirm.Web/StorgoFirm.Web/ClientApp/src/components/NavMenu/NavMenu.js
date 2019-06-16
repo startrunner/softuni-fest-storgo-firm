@@ -146,7 +146,7 @@ export default class NavMenu extends React.Component {
                 <Container>
                   <Menu.Item as={Link} to="/" style={{ padding: "0em 0em" }} />
                   <Menu.Item>
-                    <SearchBar />
+                    <SearchBar events={this.props.events}/>
                   </Menu.Item>
                   <Menu.Item position="right" style={{ padding: "1em 0em" }}>
                     <Popup
