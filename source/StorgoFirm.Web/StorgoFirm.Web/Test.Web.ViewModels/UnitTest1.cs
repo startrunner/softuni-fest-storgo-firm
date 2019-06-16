@@ -33,6 +33,24 @@ namespace Tests
             JArray actual = JsonConvert.DeserializeObject<JArray>(reserialized);
             ;
             Assert.AreEqual(expected.Count, actual.Count);
+            //Assert.IsTrue(JObject.DeepEquals(expected.First, actual.First));
+            //for (int i = 0; i < expected.Count; i++)
+            //{
+            //    Assert.IsTrue(CompareEvents(expected[i] as JObject, actual[i] as JObject));
+            //}
+        }
+
+        private static bool CompareEvents(JObject x, JObject y)
+        {
+            if (x is null || y is null) return x is null == y is null;
+
+            return
+                x["dateUtc"] == y["DateUtc"] &&
+                x["homeTeamOdds"] == y["HomeTeamOdds"] &&
+                x["awayTeamOdds"] == y["AwayTeamOdds"] &&
+                x["drawOdds"] == y["DrawOdds"] &&
+                x["name"] == y["Name"] &&
+                x["sport"]["id"] == y["Sport"]["Id"];
         }
     }
 }
