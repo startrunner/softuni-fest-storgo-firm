@@ -45,7 +45,8 @@ export class Home extends Component {
     }
 
     handleLeagueChange(leagueId) {
-
+        let curLeague = leagueId;
+        this.setState({ curLeague });
     }
 
     handleSportChange(sportId) {
@@ -72,8 +73,10 @@ export class Home extends Component {
     render() {
         const events = this.props.events;
         const sports = this.props.sports;
+        const leagues = this.props.leagues;
         const currentSport = this.state.curSport;
         const currentFormat = this.state.curFormat;
+        const currentLeague = this.state.curLeague;
         return (
             <Grid columns={3} className="home-grid">
                 {events.length > 0 ?
@@ -85,20 +88,38 @@ export class Home extends Component {
                                 <Button basic onClick={() => this.handleFormatChange(FORMAT_AMERICAN)}>American</Button>
 
                                 <Header>Sports</Header>
-                                {
-                                    sports.map(sport => {
-                                        return (
-                                            <div>
-                                                <Button basic onClick={() => this.handleSportChange(sport.id)}>{sport.name}</Button>
-                                            </div>
-                                        );
-                                    })
-                                }
+
+                                <div>
+                                    <Button basic onClick={() => this.handleSportChange(null)}>[Clear]</Button>
+                                </div>
+                                <div>
+                                    {
+                                        sports.map(sport => {
+                                            return (
+                                                <div>
+                                                    <Button basic onClick={() => this.handleSportChange(sport.id)}>{sport.name}</Button>
+                                                </div>
+                                            );
+                                        })
+                                    }
+                                </div>
 
                                 <Header>Leagues</Header>
-                                {
 
-                                }
+                                <div>
+                                    <Button basic onClick={() => this.handleLeagueChange(null)}>[Clear]</Button>
+                                </div>
+                                <div>
+                                    {
+                                        leagues.map(league => {
+                                            return (
+                                                <div>
+                                                    <Button basic onClick={() => this.handleLeagueChange(league.id)}>{league.name}</Button>
+                                                </div>
+                                            );
+                                        })
+                                    }
+                                </div>
                             </Segment>
                         </Grid.Column>
 
@@ -147,6 +168,7 @@ export class Home extends Component {
                                         {
                                             events.
                                                 filter(x => currentSport == null || x.sport.id == currentSport).
+                                                filter(x => currentLeague == null || x.league.id == currentLeague).
                                                 map(event => {
                                                     return (
                                                         <Table.Row >
