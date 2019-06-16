@@ -93,6 +93,9 @@ namespace StorgoFirm.Web.Controllers
             [FromQuery, FromForm]string earliestDateUtc = null,
             [FromQuery, FromForm]long? timeWindowSeconds = null,
             [FromQuery, FromForm]string nameSearchString = null,
+            [FromQuery, FromForm]string searchString = null,
+            [FromQuery, FromForm]string sportNameSearchString = null,
+            [FromQuery, FromForm]string leagueNameSearchString = null,
             [FromQuery, FromForm]long? sportId = null,
             [FromQuery, FromForm]long? leagueId = null
         )
@@ -102,6 +105,8 @@ namespace StorgoFirm.Web.Controllers
                 throw new Exception($"Both '{nameof(earliestDateUtc)}' and '{timeWindowSeconds}' must be set.");
             }
 
+
+            StringComparison IgnoreCase = StringComparison.InvariantCultureIgnoreCase;
 
             IQueryable<SportEvent> query = db.Events;
             if (sportId != null) query = query.Where(x => x.SportId == sportId.Value);
@@ -114,7 +119,24 @@ namespace StorgoFirm.Web.Controllers
             }
             if (nameSearchString != null)
             {
-                query = query.Where(x => x.Name.Contains(nameSearchString, StringComparison.InvariantCultureIgnoreCase));
+                query = query.Where(x => x.Name.Contains(nameSearchString, IgnoreCase));
+            }
+            if (sportNameSearchString != null)
+            {
+                query = query.Where(x => x.Sport.Name.Contains(sportNameSearchString, IgnoreCase));
+            }
+            if (leagueNameSearchString != null)
+            {
+                query = query.Where(x => x.League.Name.Contains(leagueNameSearchString, IgnoreCase));
+            }
+            if (searchString != null)
+            {
+                query = query.Where(
+                    x =>
+                        x.Name.Contains(searchString, IgnoreCase) ||
+                        x.Sport.Name.Contains(searchString, IgnoreCase) ||
+                        x.League.Name.Contains(searchString, IgnoreCase)
+                );
             }
 
             query =
