@@ -16,11 +16,11 @@ const FORMAT_AMERICAN = 2;
 
 let getFraction = (decimal) => {
     var denominator = 1;
-    while (Math.abs((decimal * denominator) % 1) < .2) {
+    while (Math.abs((decimal * denominator) % 1) < .1) {
         denominator++;
     }
     let numerator = decimal * denominator;
-    return `${numerator}/${denominator}`;
+    return `${numerator - numerator % 1}/${denominator}`;
 }
 
 let formatOdd = function (odd, format) {
@@ -128,10 +128,10 @@ export class Home extends Component {
                                                     <Label>Home Team Odds: </Label>{this.state.openEvent ? formatOdd(this.state.openEvent.homeTeamOdds, currentFormat) : null}
                                                 </div>
                                                 <div>
-                                                    <Label>Away Team Odds: </Label>{this.state.openEvent ? this.state.openEvent.awayTeamOdds : null}
+                                                    <Label>Away Team Odds: </Label>{this.state.openEvent ? formatOdd(this.state.openEvent.awayTeamOdds, currentFormat) : null}
                                                 </div>
                                                 <div>
-                                                    <Label>Draw Odds: </Label>{this.state.openEvent ? this.state.openEvent.drawOdds : null}
+                                                    <Label>Draw Odds: </Label>{this.state.openEvent ? formatOdd(this.state.openEvent.drawOdds, currentFormat) : null}
                                                 </div>
                                             </Modal.Content>
                                             <Modal.Actions>
@@ -151,7 +151,7 @@ export class Home extends Component {
                                                             <Table.Cell>{event.league.name}</Table.Cell>
                                                             <Table.Cell>{event.sport.name}</Table.Cell>
                                                             <Table.Cell>
-                                                                <Button onClick={()=>this.handleOpen(event)}>View</Button>
+                                                                <Button onClick={() => this.handleOpen(event)}>View</Button>
                                                             </Table.Cell>
                                                         </Table.Row>
                                                     );
